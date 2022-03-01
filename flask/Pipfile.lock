@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "213be6427d202bc6675f7f6e6f7e5f1065a70e68c908e4f89dad5321386710ad"
+            "sha256": "eb5989ce2acbaa376212246caef8587c00259afb9ae2abc5fbc46d26da66b164"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -30,14 +30,6 @@
             ],
             "markers": "python_version >= '3.6'",
             "version": "==8.0.4"
-        },
-        "colorama": {
-            "hashes": [
-                "sha256:5941b2b48a20143d2267e95b1c2a7603ce057ee39fd88e7329b0c292aa16869b",
-                "sha256:9f47eda37229f68eee03b24b9748937c7dc3868f906e8ba69fbcbdd3bc5dc3e2"
-            ],
-            "markers": "platform_system == 'Windows'",
-            "version": "==0.4.4"
         },
         "flask": {
             "hashes": [
@@ -129,6 +121,7 @@
                 "sha256:87a831b7a3bfa8351511961469ed0462a769724d4da48a501cb8c96d1e17f570",
                 "sha256:99fe612dbe5f41e07124d9002c118c14f3ee703574ffa9779fee78135b8b94b6"
             ],
+            "index": "pypi",
             "version": "==1.4.2"
         },
         "pymongo": {

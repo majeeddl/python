@@ -1,7 +1,16 @@
 {
-    "folders": [
+	"folders": [
 		{
-			"path": "."
+			"path": "./base"
+		},
+		{
+			"path": "./pure"
+		},
+		{
+			"path": "./machine_learing"
+		},
+		{
+			"path": "./resources"
 		}
 	]
 }

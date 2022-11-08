@@ -23,6 +23,9 @@
     },
     {
       "path": "python-rabbitmq"
+    },
+    {
+      "path": "dependency-injection"
     }
   ]
 }

@@ -13,9 +13,6 @@ def main(email: str, user_service: UserService = Provide[Container.user_service]
     user = user_service.get_user(email)
     print(user)
 
-
-print(__name__)
-
 if __name__ == "__main__":
     container = Container()
     container.init_resources()

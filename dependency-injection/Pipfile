@@ -5,6 +5,9 @@ name = "pypi"
 
 [packages]
 dependency-injector = {extras = ["yaml"], version = "*"}
+github = "*"
+flask-bootstrap = "*"
+flask = "*"
 
 [dev-packages]
 

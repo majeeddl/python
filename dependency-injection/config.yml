@@ -28,3 +28,9 @@ services:
 
   auth:
     token_ttl: 3600
+
+github:
+  request_timeout: 10
+default:
+  query: "Dependency Injector"
+  limit: 10

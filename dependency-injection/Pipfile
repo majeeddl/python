@@ -8,6 +8,7 @@ dependency-injector = {extras = ["yaml"], version = "*"}
 github = "*"
 flask-bootstrap = "*"
 flask = "*"
+coverage = "*"
 
 [dev-packages]
 

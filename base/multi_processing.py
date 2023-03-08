@@ -2,7 +2,7 @@
 # Description: This is a simple example of using multiprocessing in Python.
 import time
 from time import sleep
-from multiprocessing import Process, Queue, cpu_count
+from multiprocessing import Process, Queue, cpu_count, active_children
 
 import json
 import logging
@@ -15,7 +15,7 @@ topic = "kline.5.BTCUSDT"
 
 def on_message(ws, message):
     data = json.loads(message)
-    print(data)
+    print(data['data'][0]['close'])
 
 
 def on_error(ws, error):
@@ -46,7 +46,7 @@ def on_ping(ws, *data):
 
 def connWS():
     ws = websocket.WebSocketApp(
-        "wss://stream-testnet.bybit.com/contract/usdt/public/v3",
+        "wss://stream.bybit.com/v5/public/linear",
         on_message=on_message,
         on_error=on_error,
         on_close=on_close,
@@ -73,15 +73,16 @@ if __name__ == '__main__':
 
     print('Starting main process')
 
-    process = Process(target=task, args=(
+    process = Process(name='My Process', target=task, args=(
         6, "Parameter message from main process"))
 
     process.start()
     # print('Waiting for the process...')
     # process.join()
     print('Process is still running')
+    print(active_children())
 
-    sleep(10)
+    sleep(100)
 
     process.terminate()
 

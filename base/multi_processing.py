@@ -1,0 +1,93 @@
+
+# Description: This is a simple example of using multiprocessing in Python.
+import time
+from time import sleep
+from multiprocessing import Process, Queue, cpu_count
+
+import json
+import logging
+from datetime import datetime
+import websocket
+
+
+topic = "kline.5.BTCUSDT"
+
+
+def on_message(ws, message):
+    data = json.loads(message)
+    print(data)
+
+
+def on_error(ws, error):
+    print('we got error')
+    print(error)
+    print('print error complete')
+
+
+def on_close(ws):
+    print("### about to close please don't close ###")
+
+
+def on_open(ws):
+    print('opened')
+    ws.send(json.dumps({"op": "subscribe", "args": [topic]}))
+
+
+def on_pong(ws, *data):
+    print('pong received')
+
+
+def on_ping(ws, *data):
+    now = datetime.now()
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    print("date and time =", dt_string)
+    print('ping received')
+
+
+def connWS():
+    ws = websocket.WebSocketApp(
+        "wss://stream-testnet.bybit.com/contract/usdt/public/v3",
+        on_message=on_message,
+        on_error=on_error,
+        on_close=on_close,
+        on_ping=on_ping,
+        on_pong=on_pong,
+        on_open=on_open
+    )
+    ws.run_forever(
+        # http_proxy_host='127.0.0.1',
+        # http_proxy_port=1087,
+        ping_interval=20,
+        ping_timeout=10
+    )
+
+
+def task(sleep_time, message):
+    connWS()
+    sleep(sleep_time)
+    print(message)
+    # print('Finished sleeping')
+
+
+if __name__ == '__main__':
+
+    print('Starting main process')
+
+    process = Process(target=task, args=(
+        6, "Parameter message from main process"))
+
+    process.start()
+    # print('Waiting for the process...')
+    # process.join()
+    print('Process is still running')
+
+    sleep(10)
+
+    process.terminate()
+
+    print('Finished main process')
+
+    # while True:
+
+    #     print("end file")
+    #     time.sleep(10)

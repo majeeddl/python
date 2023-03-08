@@ -5,7 +5,7 @@ from time import sleep
 from multiprocessing import Process, Queue, cpu_count
 
 
-print('Number of CPU cores: ', cpu_count())
+# print('Number of CPU cores: ', cpu_count())
 
 
 # colors = ['red', 'blue', 'green', 'yellow', 'black', 'white']
@@ -26,11 +26,17 @@ if __name__ == '__main__':
 
     print('Starting main process')
 
-    process = Process(target=task, args=(1.5, "Parameter message from main process"))
+    process = Process(target=task, args=(6, "Parameter message from main process"))
 
     process.start()
-    print('Waiting for the process...')
-    process.join()
+    # print('Waiting for the process...')
+    # process.join()
+    print('Process is still running')
+   
+    sleep(10)
+
+    print('Finished main process')
+
 
     # while True:
 

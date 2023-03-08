@@ -1,48 +1,38 @@
-
-# Description: This is a simple example of using multiprocessing in Python.
-import time
-from time import sleep
-from multiprocessing import Process, Queue, cpu_count
-
 import json
 import logging
+import time
 from datetime import datetime
 import websocket
 
+logging.basicConfig(filename='logfile_wrapper.log', level=logging.DEBUG,
+                    format='%(asctime)s %(levelname)s %(message)s')
 
 topic = "kline.5.BTCUSDT"
-
 
 def on_message(ws, message):
     data = json.loads(message)
     print(data)
-
 
 def on_error(ws, error):
     print('we got error')
     print(error)
     print('print error complete')
 
-
 def on_close(ws):
     print("### about to close please don't close ###")
-
 
 def on_open(ws):
     print('opened')
     ws.send(json.dumps({"op": "subscribe", "args": [topic]}))
 
-
 def on_pong(ws, *data):
     print('pong received')
-
 
 def on_ping(ws, *data):
     now = datetime.now()
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
     print("date and time =", dt_string)
     print('ping received')
-
 
 def connWS():
     ws = websocket.WebSocketApp(
@@ -55,39 +45,13 @@ def connWS():
         on_open=on_open
     )
     ws.run_forever(
-        # http_proxy_host='127.0.0.1',
-        # http_proxy_port=1087,
-        ping_interval=20,
-        ping_timeout=10
-    )
+		#http_proxy_host='127.0.0.1',
+		#http_proxy_port=1087,
+		ping_interval=20,
+		ping_timeout=10
+	)
 
 
-def task(sleep_time, message):
+if __name__ == "__main__":
+    #websocket.enableTrace(True)
     connWS()
-    sleep(sleep_time)
-    print(message)
-    # print('Finished sleeping')
-
-
-if __name__ == '__main__':
-
-    print('Starting main process')
-
-    process = Process(target=task, args=(
-        6, "Parameter message from main process"))
-
-    process.start()
-    # print('Waiting for the process...')
-    # process.join()
-    print('Process is still running')
-
-    sleep(10)
-
-    process.terminate()
-
-    print('Finished main process')
-
-    # while True:
-
-    #     print("end file")
-    #     time.sleep(10)
